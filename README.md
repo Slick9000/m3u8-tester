@@ -8,6 +8,12 @@ program which tests m3u8 stream files (or any stream, really) and outputs workin
 
 [python-vlc](https://pypi.org/project/python-vlc/), as well as a 64 bit vlc installation
 
+**command line usage**
+
+you can also give `m3u8 tester.py` **direct command line arguments**
+
+**e.g: `m3u8-tester.exe {option-number} {link/file-path}`, or you can use the tkinter gui included with the program.**
+
 ## features
 **1: allows you to input a raw url formatted in m3u8 format**
 
@@ -127,11 +133,3 @@ Working links: 1/2
 Processing time: 0:00:16.110000
 
 ```
-
-<br/>
-
-**command line usage**
-
-you can also give `m3u8 tester.py` **direct command line arguments**
-
-**e.g: `m3u8-tester.exe {option-number} {link/file-path}`, or you can use the tkinter gui included with the program.**
