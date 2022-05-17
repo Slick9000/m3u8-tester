@@ -1,6 +1,10 @@
 # m3u8-tester
 program which tests m3u8 stream files (or any stream, really) and outputs working streams to a m3u8 file named by date and time.
 
+i created this program due to the fact that although many stream testers are available out there, none of them seem to have the simple option of outputting all working streams to a text file. i may be wrong, but it doesn't seem so.
+
+many of these stream testers also don't have the flexibility of my m3u8-tester, which allows you to see the process in real time and see the number of streams which are working vs failing, and test streams regardless of the format they are in.
+
 ## [download](https://github.com/Slick9000/m3u8-tester/releases/latest)
 
 ## requirements
