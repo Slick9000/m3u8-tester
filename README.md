@@ -8,6 +8,9 @@ program which tests m3u8 stream files (or any stream, really) and outputs workin
 
 [python-vlc](https://pypi.org/project/python-vlc/), as well as a 64 bit vlc installation
 
+## documentation
+there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them
+
 ## features
 
 **command line usage**
@@ -136,6 +139,3 @@ Working links: 1/2
 Processing time: 0:00:16.110000
 
 ```
-
-## documentation
-there are comments all over the code within both the gui and main program files. if there is anything you are unsure about, be sure to check in them
