@@ -158,8 +158,7 @@ def runCommand(link, file, timeout=None, window=None):
 
         option = 3
 
-        source = file.get()
-
+        source = link.get()
         
     #run testing through raw webpage
     elif link.get() != '':
