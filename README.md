@@ -136,3 +136,6 @@ Working links: 1/2
 Processing time: 0:00:16.110000
 
 ```
+
+## documentation
+there are comments all over the code within both the gui and main program files. if there is anything you are unsure about, be sure to check in them
