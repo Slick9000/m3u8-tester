@@ -21,7 +21,7 @@ there are comments all over the code within both the gui and main program files 
 
 you can give `m3u8 tester.pyw` or `m3u8 tester.py` **direct command line arguments**
 
-**e.g: `m3u8-tester.exe {option-number} {link/file-path}`, or you can use the tkinter gui included with the program.**
+**e.g: `python "m3u8 tester.py" {option-number} "{link/file-path}"`, or you can use the tkinter gui included with the program.**
 
 <br/>
 
