@@ -10,10 +10,10 @@ many of these stream testers also don't have the flexibility of my m3u8-tester, 
 ## requirements
 [requests](https://pypi.org/project/requests/)
 
-[python-vlc](https://pypi.org/project/python-vlc/), as well as a 64 bit vlc installation
+[python-vlc](https://pypi.org/project/python-vlc/), as well as a 64 bit vlc installation.
 
 ## documentation
-there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them
+there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them.
 
 ## features
 
@@ -137,7 +137,7 @@ Stream is working. Current state = State.Playing
 Failed links: 1
 Working links: 1
 Completed: 2/2
-Link testing complete! Working links can be located in D:\Programs\Projects\A New Leaf - Proper Development\python\m3u8 tester\17th May, 2022 (16-32-58).m3u8.
+Link testing complete! Working links can be located in {current-working-directory}/17th May, 2022 (16-32-58).m3u8.
 Failed links: 1/2
 Working links: 1/2
 Processing time: 0:00:16.110000
