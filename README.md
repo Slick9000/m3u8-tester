@@ -25,7 +25,7 @@ you can give `m3u8 tester.pyw` or `m3u8 tester.py` **direct command line argumen
 
 **cli version**
 
-there is also a cli (command-line interface) version of the application, `m3u8 tester cli.py`, in case you prefer a menu version of m3u8 tester
+m3u8 tester was orignally a cli (command-line interface) program, so there is `m3u8 tester cli.py`, in case you prefer that.
 
 **e.g: [link](https://pastebin.com/raw/SLZf7d4y)**
 
