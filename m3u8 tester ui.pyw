@@ -225,6 +225,28 @@ def runCommand(link, file, timeout=None, window=None):
 #window
 tkWindow = Tk()
 
+#allows you to supply direct command line arguments to the gui
+if len(sys.argv) != 0:
+    
+    tkWindow.withdraw()
+
+    #to get directory of process. first one gets the current working directory
+    #if running as a script, second one gets the working directory from files
+    #embedded within pyinstaller's exectuable if running as an exe
+    #command to build pyinstaller exectuable: pyinstaller --onefile --add-data="m3u8 tester.py;files" '.\m3u8 tester ui.pyw'
+    running_dir = os.getcwd()
+
+    if getattr(sys, 'frozen', False): # Running as compiled
+
+        running_dir = sys._MEIPASS + "/files/"
+
+    option = sys.argv[1]
+
+    source = sys.argv[2]
+
+    process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}"',
+                               shell=False)
+
 tkWindow.resizable(False, False)
 
 tkWindow.title('M3U8 Tester')
