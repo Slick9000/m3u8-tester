@@ -26,7 +26,7 @@ def aboutSection():
                        'pastebin.com/raw, raw.githubusercontent.com) as well as '
                        'raw webpages and files with a list of links only, '
                        'and returns the working links in a M3U8 file.\n\n'
-                       'Created by Slick9000 (Deontae Best)'
+                       'Created by Slick9000'
                        )
 
 def helpSection():
@@ -46,7 +46,7 @@ def helpSection():
                        'for links only is not selected, the output file will result in '
                        '"[]" for every link. Therefore, be sure to check the option.\n\n'
                        'IMPORTANT DISCLAIMER: A 64 bit version of VLC is required to be '
-                       'unstalled on the user\'s system, otherwise this program will not '
+                       'installed on the user\'s system, otherwise this program will not '
                        'be able to function. This is due to how python and vlc interact '
                        'with one another, and the error "Could not find module libvlc.dll" '
                        'will occur.'
@@ -224,28 +224,6 @@ def runCommand(link, file, timeout=None, window=None):
 
 #window
 tkWindow = Tk()
-
-#allows you to supply direct command line arguments to the gui
-if len(sys.argv) == 3:
-    
-    tkWindow.withdraw()
-
-    #to get directory of process. first one gets the current working directory
-    #if running as a script, second one gets the working directory from files
-    #embedded within pyinstaller's exectuable if running as an exe
-    #command to build pyinstaller exectuable: pyinstaller --onefile --add-data="m3u8 tester.py;files" '.\m3u8 tester ui.pyw'
-    running_dir = os.getcwd()
-
-    if getattr(sys, 'frozen', False): # Running as compiled
-
-        running_dir = sys._MEIPASS + "/files/"
-
-    option = sys.argv[1]
-
-    source = sys.argv[2]
-
-    process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}"',
-                               shell=False)
 
 tkWindow.resizable(False, False)
 
