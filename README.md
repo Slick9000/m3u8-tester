@@ -23,6 +23,42 @@ you can give `m3u8 tester.pyw` or `m3u8 tester.py` **direct command line argumen
 
 **e.g: `python "m3u8 tester.py" {option-number} "{link/file-path}"`, or you can use the tkinter gui included with the program.**
 
+**cli version**
+
+there is also a cli (command-line interface) version of the application, `m3u8 tester cli.py`, in case you prefer a menu version of m3u8 tester
+
+**e.g: [link](https://pastebin.com/raw/SLZf7d4y)**
+
+```
+M3U8 Tester
+Select a method to input data:
+1 - Raw Webpage
+2 - M3U/M3U8 File
+3 - Raw Webpage with ONLY Links
+4 - Raw File with ONLY Links
+5 - Exit Program
+: 3
+
+Enter '/RETURN' to return to option selection
+Input a link
+: https://pastebin.com/raw/SLZf7d4y
+Adding new data entries...
+New entries added to masterdata file.
+Loading 10 URLS...
+
+
+Press 'Ctrl+C' to end process at any time.
+All current progress will be saved.
+
+Stream is dead. Current state = State.Ended
+Failed links: 1
+Working links: 0
+Completed: 1/10
+Press 'Ctrl+C' to end process at any time.
+All current progress will be saved.
+```
+...and so on.
+
 <br/>
 
 **1: allows you to input a raw url formatted in m3u8 format**
@@ -45,7 +81,7 @@ Completed: 1/383
 Press 'Ctrl+C' to end process at any time.
 All current progress will be saved.
 ```
-...and so on
+...and so on.
 
 <br/>
 
@@ -102,7 +138,7 @@ Completed: 1/10
 Press 'Ctrl+C' to end process at any time.
 All current progress will be saved.
 ```
-...and so on
+...and so on.
 
 <br/>
 
