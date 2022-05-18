@@ -226,7 +226,7 @@ def runCommand(link, file, timeout=None, window=None):
 tkWindow = Tk()
 
 #allows you to supply direct command line arguments to the gui
-if len(sys.argv) != 0:
+if len(sys.argv) == 3:
     
     tkWindow.withdraw()
 
