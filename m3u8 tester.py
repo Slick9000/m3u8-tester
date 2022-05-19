@@ -239,6 +239,12 @@ async def fileProcess():
 
             file_content = master_content.read()
 
+            if file_content == "":
+
+                print("No data in file!")
+
+                return
+
             print("Adding new data entries...")
 
             temp1_name = str(random.randint(111111, 999999))
@@ -604,6 +610,12 @@ async def linkOnlyFileProcess():
         with io.open(fileName, mode="r", encoding="utf-8") as master_content:
 
             file_content = master_content.read()
+
+            if file_content == "":
+
+                print("No data in file!")
+
+                return
 
             print("Adding new data entries...")
 
