@@ -179,3 +179,19 @@ Working links: 1/2
 Processing time: 0:00:16.110000
 
 ```
+
+<br/>
+
+## additional program: logo searcher
+
+logo searcher is simple. you enter a channel name or click the paste button if you have it copied to clipboard, and click **find logo**.
+
+the scroll bar allows you to select the first **20** results. it defaults to **1**.
+
+**tvg-logo="{logo-url}"** is automatically copied to clipboard. all you have to do then, is just paste into your m3u8 file.
+
+there's also a **preview** of the logo displayed so you can determine whether the logo selected is desirable to you.
+
+**example:**
+
+<img src="logosearcher-preview.png">
