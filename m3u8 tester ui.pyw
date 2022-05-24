@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from multiprocessing.dummy import Process
 from functools import partial
 import os
