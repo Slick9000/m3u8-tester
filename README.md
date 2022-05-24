@@ -10,7 +10,11 @@ many of these stream testers also don't have the flexibility of my m3u8-tester, 
 ## requirements
 [requests](https://pypi.org/project/requests/)
 
-[python-vlc](https://pypi.org/project/python-vlc/), as well as a 64 bit vlc installation.
+[python-vlc](https://pypi.org/project/python-vlc/)
+
+(m3u8 tester automatically installs these python packages if not installed)
+
+[vlc (64 bit)](https://www.videolan.org/vlc/)
 
 ## documentation
 there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them.
