@@ -5,12 +5,49 @@ import io
 import os
 import random
 import re
-import requests
 import sys
 import time
 
-#NOTE: REQUIRES 64 BIT VLC TO BE INSTALLED
-import vlc
+python = 'python3'
+
+if 'win' in sys.platform:
+    
+    python = 'python'
+
+print('(*) Checking for required dependencies...\n')
+
+while True:
+    
+    try:
+        
+        import requests
+        #NOTE: REQUIRES 64 BIT VLC TO BE INSTALLED
+        import vlc
+        
+        break
+    
+    except ModuleNotFoundError as e:
+        
+        module = str(e)[17:-1]
+
+        if module == "vlc":
+
+            module = "python-vlc"
+        
+        print(f'(*) Installing {module} module for python')
+        
+        try:
+            
+            if os.system(f'{python} -m pip install {module}') != 0:
+                
+                raise error
+            
+        except Exception:
+            print(f'(!) Error installing "{module}" module. Do you have pip installed?')
+            
+            input(f'(!) Failed to initialize m3u8 tester. Press Ctrl+C to exit...')
+            
+            sys.exit()
 
 
 async def selection():
