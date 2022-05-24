@@ -259,7 +259,7 @@ async def webProcess():
                     #physical \n in text
                     escape_qm = i.replace("?", "\\?")
 
-                    format_get = re.findall(r'#EXTINF.*\n{url}'
+                    format_get = re.findall(r'#.*\n{url}'
                         .format(url=escape_qm), master_data)
 
                     remove_start_bracket = str(format_get).replace("['", "")
@@ -463,7 +463,7 @@ async def fileProcess():
                         #physical \n in text
                         escape_qm = i.replace("?", "\\?")
 
-                        format_get = re.findall(r'#EXTINF.*\n{url}'
+                        format_get = re.findall(r'#.*\n{url}'
                             .format(url=escape_qm), master_data)
 
                         remove_start_bracket = str(format_get).replace("['", "")
