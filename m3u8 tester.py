@@ -45,6 +45,7 @@ while True:
                 raise error
             
         except Exception:
+            
             print(f'(!) Error installing "{module}" module. Do you have pip installed?')
             
             input(f'(!) Failed to initialize m3u8 tester. Press Ctrl+C to exit...')
@@ -127,7 +128,7 @@ async def webProcess():
             #search for all other links
             remquote = re.sub(r'"', '', line)
 
-            remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
+            remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
                                '', remquote)
         
             urls = re.findall(r'(https?://[^\s]+)', remimages)
@@ -188,6 +189,24 @@ async def webProcess():
                       f"Working links: {working}\n"
                       f"Completed: {working + failed}/{len(urls)}"
                       )
+
+                #text formatting and regex
+                #escapes ? for regex, removes list formatting, and removes
+                #physical \n in text
+                escape_qm = i.replace("?", "\\?")
+
+                format_get = re.findall(r'#.*\n{url}'
+                    .format(url=escape_qm), master_data)
+
+                remove_start_bracket = str(format_get).replace("['", "")
+
+                remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                remove_newline = remove_end_bracket.replace("\\n", "\n")
+
+                with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                        
+                    failed_file.write(f"{remove_newline}\n\n")
                        
             else:
 
@@ -225,6 +244,8 @@ async def webProcess():
     end_time = time.monotonic()
         
     result_file.close()
+
+    failed_file.close()
 
     file1.close()
 
@@ -328,7 +349,7 @@ async def fileProcess():
                 #search for all other links
                 remquote = re.sub(r'"', '', line)
 
-                remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
+                remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
                                    '', remquote)
         
                 urls = re.findall(r'(https?://[^\s]+)', remimages)
@@ -376,6 +397,10 @@ async def fileProcess():
                 #get current state.
                 state = str(player.get_state())
 
+                with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
+
+                        master_data = file1.read()
+
                 #find out if stream is working.
                 if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
 
@@ -389,43 +414,59 @@ async def fileProcess():
                           f"Working links: {working}\n"
                           f"Completed: {working + failed}/{len(urls)}"
                           )
+
+                    #text formatting and regex
+                    #escapes ? for regex, removes list formatting, and removes
+                    #physical \n in text
+                    escape_qm = i.replace("?", "\\?")
+
+                    format_get = re.findall(r'#.*\n{url}'
+                        .format(url=escape_qm), master_data)
+
+                    remove_start_bracket = str(format_get).replace("['", "")
+
+                    remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                    remove_newline = remove_end_bracket.replace("\\n", "\n")
+
+                    with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                        
+                        failed_file.write(f"{remove_newline}\n\n")
                        
                 else:
 
                     working = working + 1
-
-                    with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
-
-                        master_data = file1.read()
             
-                        print('Stream is working. Current state = {}'.format(state))
+                    print('Stream is working. Current state = {}'.format(state))
 
-                        player.stop()
+                    player.stop()
 
-                        print(f"Failed links: {failed}\n"
-                              f"Working links: {working}\n"
-                              f"Completed: {working + failed}/{len(urls)}"
-                              )
+                    print(f"Failed links: {failed}\n"
+                          f"Working links: {working}\n"
+                          f"Completed: {working + failed}/{len(urls)}"
+                          )
 
-                        #text formatting and regex
-                        #escapes ? for regex, removes list formatting, and removes
-                        #physical \n in text
-                        escape_qm = i.replace("?", "\\?")
+                    #text formatting and regex
+                    #escapes ? for regex, removes list formatting, and removes
+                    #physical \n in text
+                    escape_qm = i.replace("?", "\\?")
 
-                        format_get = re.findall(r'#.*\n{url}'
-                            .format(url=escape_qm), master_data)
+                    format_get = re.findall(r'#.*\n{url}'
+                        .format(url=escape_qm), master_data)
 
-                        remove_start_bracket = str(format_get).replace("['", "")
+                    remove_start_bracket = str(format_get).replace("['", "")
 
-                        remove_end_bracket = remove_start_bracket.replace("']", "")
+                    remove_end_bracket = remove_start_bracket.replace("']", "")
 
-                        remove_newline = remove_end_bracket.replace("\\n", "\n")
+                    remove_newline = remove_end_bracket.replace("\\n", "\n")
 
-                        result_file.write(f"{remove_newline}\n\n")
+                    result_file.write(f"{remove_newline}\n\n")
 
         end_time = time.monotonic()
         
         result_file.close()
+
+        failed_file.close()
 
         file1.close()
 
@@ -519,7 +560,7 @@ async def linkOnlyWebProcess():
             #search for all other links
             remquote = re.sub(r'"', '', line)
 
-            remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
+            remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
                                '', remquote)
         
             urls = re.findall(r'(https?://[^\s]+)', remimages)
@@ -578,6 +619,24 @@ async def linkOnlyWebProcess():
                       f"Working links: {working}\n"
                       f"Completed: {working + failed}/{len(urls)}"
                       )
+
+                #text formatting and regex
+                #escapes ? for regex, removes list formatting, and removes
+                #physical \n in text
+                escape_qm = i.replace("?", "\\?")
+
+                format_get = re.findall(r'#.*\n{url}'
+                    .format(url=escape_qm), master_data)
+
+                remove_start_bracket = str(format_get).replace("['", "")
+
+                remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                remove_newline = remove_end_bracket.replace("\\n", "\n")
+
+                with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                        
+                    failed_file.write(f"{remove_newline}\n\n")
                        
             else:
 
@@ -597,6 +656,8 @@ async def linkOnlyWebProcess():
     end_time = time.monotonic()
         
     result_file.close()
+
+    failed_file.close()
 
     file1.close()
 
@@ -700,7 +761,7 @@ async def linkOnlyFileProcess():
                 #search for all other links
                 remquote = re.sub(r'"', '', line)
 
-                remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
+                remimages = re.sub(r'[(http)(https)][^\s]+jpg|[(http)(https)][^\s]+jpeg|[(http)(https)][^\s]+png|[(http)(https)][^\s]+svg|[(http)(https)][^\s]+&s',
                                    '', remquote)
         
                 urls = re.findall(r'(https?://[^\s]+)', remimages)
@@ -759,6 +820,24 @@ async def linkOnlyFileProcess():
                           f"Working links: {working}\n"
                           f"Completed: {working + failed}/{len(urls)}"
                           )
+
+                    #text formatting and regex
+                    #escapes ? for regex, removes list formatting, and removes
+                    #physical \n in text
+                    escape_qm = i.replace("?", "\\?")
+
+                    format_get = re.findall(r'#.*\n{url}'
+                        .format(url=escape_qm), master_data)
+
+                    remove_start_bracket = str(format_get).replace("['", "")
+
+                    remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                    remove_newline = remove_end_bracket.replace("\\n", "\n")
+
+                    with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                        
+                        failed_file.write(f"{remove_newline}\n\n")
                        
                 else:
 
@@ -778,6 +857,8 @@ async def linkOnlyFileProcess():
         end_time = time.monotonic()
         
         result_file.close()
+
+        failed_file.close()
 
         file1.close()
 
