@@ -9,7 +9,7 @@ import sys
 import tkinter
 from tkinter import Button, BooleanVar, Checkbutton, END, Entry, filedialog, Frame, Label, LabelFrame, Menu, messagebox, scrolledtext, StringVar, Tk
 
-#this allows the python subprocess to be printed in real time
+#allows the python subprocess output to be printed in real time
 os.environ['PYTHONUNBUFFERED'] = '1'
 
 #allows subprocess to work on unix and windows
@@ -30,6 +30,7 @@ def aboutSection():
                        'and returns the working links in a M3U8 file.\n\n'
                        'Created by Slick9000'
                        )
+
 
 def helpSection():
 
@@ -53,6 +54,7 @@ def helpSection():
                        'with one another, and the error "Could not find module libvlc.dll" '
                        'will occur.'
                        )
+
 
 def pasteLink():
 
@@ -79,6 +81,7 @@ def pasteLink():
         txtbox.configure(state='disabled')
 
         return
+
 
 def browseFiles():
     
@@ -191,12 +194,12 @@ def runCommand(link, file, timeout=None, window=None):
     #to get directory of process. first one gets the current working directory
     #if running as a script, second one gets the working directory from files
     #embedded within pyinstaller's exectuable if running as an exe
-    #command to build pyinstaller exectuable: pyinstaller --onefile --add-data="m3u8 tester.py;files" '.\m3u8 tester ui.pyw'
+    #command to build pyinstaller exectuable: pyinstaller --onefile --add-data="m3u8 tester.py;." '.\m3u8 tester ui.pyw'
     running_dir = os.getcwd()
 
     if getattr(sys, 'frozen', False): # Running as compiled
 
-        running_dir = sys._MEIPASS + "/files/"
+        running_dir = sys._MEIPASS
 
 
     #subprocess for running m3u8 tester
@@ -271,6 +274,7 @@ runCommand = partial(runCommand, link, file)
 def runCommandThread():
 
     runCommandProcess = Process(target=runCommand)
+    
     runCommandProcess.start()
 
 #checkbox for if raw webpage only contains links
@@ -305,6 +309,7 @@ filemenu = Menu(menu)
 filemenu.add_separator()
 
 menu.add_command(label='About', command=aboutSection)
+
 menu.add_command(label='Help', command=helpSection)
 
 #group2 Frame ----------------------------------------------------
