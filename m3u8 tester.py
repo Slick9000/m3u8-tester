@@ -139,84 +139,51 @@ async def webProcess():
 
     with io.open(final_result_name, mode="w", encoding="utf-8") as result_file:
 
-        failed = 0
+        with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
 
-        working = 0
+            failed = 0
 
-        start_time = time.monotonic()
+            working = 0
 
-        result_file.write("#EXTM3U\n")
+            start_time = time.monotonic()
 
-        print(f"Loading {len(urls)} URLS...\n\n")
+            result_file.write("#EXTM3U\n")
 
-        for i in urls:
+            print(f"Loading {len(urls)} URLS...\n\n")
+
+            for i in urls:
     
-            #create VLC instance
-            instance = vlc.Instance('--no-video --rtsp-timeout=12')
+                #create VLC instance
+                instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
-            #define VLC player
-            player=instance.media_player_new()
+                #define VLC player
+                player=instance.media_player_new()
 
-            #define VLC media
-            media=instance.media_new(i)
+                #define VLC media
+                media=instance.media_new(i)
 
-            #set player media
-            player.set_media(media)
+                #set player media
+                player.set_media(media)
 
-            #play the media
-            player.play()
+                #play the media
+                player.play()
 
-            #sleep for 8 sec for VLC to complete retries
-            print("Press 'Ctrl+C' to end process at any time.\n"
-                  "All current progress will be saved.\n"
-                  )
-
-            await asyncio.sleep(8)
-
-            #get current state.
-            state = str(player.get_state())
-
-            #find out if stream is working.
-            if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
-
-                failed = failed + 1
-
-                print('Stream is dead. Current state = {}'.format(state))
-
-                player.stop()
-
-                print(f"Failed links: {failed}\n"
-                      f"Working links: {working}\n"
-                      f"Completed: {working + failed}/{len(urls)}"
+                #sleep for 8 sec for VLC to complete retries
+                print("Press 'Ctrl+C' to end process at any time.\n"
+                      "All current progress will be saved.\n"
                       )
 
-                #text formatting and regex
-                #escapes ? for regex, removes list formatting, and removes
-                #physical \n in text
-                escape_qm = i.replace("?", "\\?")
+                await asyncio.sleep(8)
 
-                format_get = re.findall(r'#.*\n{url}'
-                    .format(url=escape_qm), master_data)
+                #get current state.
+                state = str(player.get_state())
 
-                remove_start_bracket = str(format_get).replace("['", "")
+                #find out if stream is working.
+                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
 
-                remove_end_bracket = remove_start_bracket.replace("']", "")
+                    failed = failed + 1
 
-                remove_newline = remove_end_bracket.replace("\\n", "\n")
-
-                with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
-                        
-                    failed_file.write(f"{remove_newline}\n\n")
-                       
-            else:
-
-                working = working + 1
-
-                with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
-
-                    master_data = file1.read()
-            
-                    print('Stream is working. Current state = {}'.format(state))
+                    print('Stream is dead. Current state = {}'.format(state))
 
                     player.stop()
 
@@ -238,8 +205,41 @@ async def webProcess():
                     remove_end_bracket = remove_start_bracket.replace("']", "")
 
                     remove_newline = remove_end_bracket.replace("\\n", "\n")
+                        
+                    failed_file.write(f"{remove_newline}\n\n")
+                       
+                else:
 
-                    result_file.write(f"{remove_newline}\n\n")
+                    working = working + 1
+
+                    with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
+
+                        master_data = file1.read()
+            
+                        print('Stream is working. Current state = {}'.format(state))
+
+                        player.stop()
+
+                        print(f"Failed links: {failed}\n"
+                              f"Working links: {working}\n"
+                              f"Completed: {working + failed}/{len(urls)}"
+                              )
+
+                        #text formatting and regex
+                        #escapes ? for regex, removes list formatting, and removes
+                        #physical \n in text
+                        escape_qm = i.replace("?", "\\?")
+
+                        format_get = re.findall(r'#.*\n{url}'
+                            .format(url=escape_qm), master_data)
+
+                        remove_start_bracket = str(format_get).replace("['", "")
+
+                        remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                        remove_newline = remove_end_bracket.replace("\\n", "\n")
+
+                        result_file.write(f"{remove_newline}\n\n")
 
     end_time = time.monotonic()
         
@@ -360,107 +360,107 @@ async def fileProcess():
 
         with io.open(final_result_name, mode="w", encoding="utf-8") as result_file:
 
-            failed = 0
+            with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
 
-            working = 0
+                failed = 0
 
-            start_time = time.monotonic()
+                working = 0
 
-            result_file.write("#EXTM3U\n")
+                start_time = time.monotonic()
 
-            print(f"Loading {len(urls)} URLS...\n\n")
+                result_file.write("#EXTM3U\n")
 
-            for i in urls:
+                print(f"Loading {len(urls)} URLS...\n\n")
+
+                for i in urls:
     
-                #create VLC instance
-                instance = vlc.Instance('--no-video --rtsp-timeout=12')
+                    #create VLC instance
+                    instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
-                #define VLC player
-                player=instance.media_player_new()
+                    #define VLC player
+                    player=instance.media_player_new()
 
-                #define VLC media
-                media=instance.media_new(i)
+                    #define VLC media
+                    media=instance.media_new(i)
 
-                #set player media
-                player.set_media(media)
+                    #set player media
+                    player.set_media(media)
 
-                #play the media
-                player.play()
+                    #play the media
+                    player.play()
 
-                #sleep for 8 sec for VLC to complete retries
-                print("Press 'Ctrl+C' to end process at any time.\n"
-                      "All current progress will be saved.\n"
-                      )
-
-                await asyncio.sleep(8)
-
-                #get current state.
-                state = str(player.get_state())
-
-                with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
-
-                        master_data = file1.read()
-
-                #find out if stream is working.
-                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
-
-                    failed = failed + 1
-
-                    print('Stream is dead. Current state = {}'.format(state))
-
-                    player.stop()
-
-                    print(f"Failed links: {failed}\n"
-                          f"Working links: {working}\n"
-                          f"Completed: {working + failed}/{len(urls)}"
+                    #sleep for 8 sec for VLC to complete retries
+                    print("Press 'Ctrl+C' to end process at any time.\n"
+                          "All current progress will be saved.\n"
                           )
 
-                    #text formatting and regex
-                    #escapes ? for regex, removes list formatting, and removes
-                    #physical \n in text
-                    escape_qm = i.replace("?", "\\?")
+                    await asyncio.sleep(8)
 
-                    format_get = re.findall(r'#.*\n{url}'
-                        .format(url=escape_qm), master_data)
+                    #get current state.
+                    state = str(player.get_state())
 
-                    remove_start_bracket = str(format_get).replace("['", "")
+                    #find out if stream is working.
+                    if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
 
-                    remove_end_bracket = remove_start_bracket.replace("']", "")
+                        failed = failed + 1
 
-                    remove_newline = remove_end_bracket.replace("\\n", "\n")
+                        print('Stream is dead. Current state = {}'.format(state))
 
-                    with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                        player.stop()
+
+                        print(f"Failed links: {failed}\n"
+                              f"Working links: {working}\n"
+                              f"Completed: {working + failed}/{len(urls)}"
+                              )
+
+                        #text formatting and regex
+                        #escapes ? for regex, removes list formatting, and removes
+                        #physical \n in text
+                        escape_qm = i.replace("?", "\\?")
+
+                        format_get = re.findall(r'#.*\n{url}'
+                            .format(url=escape_qm), master_data)
+
+                        remove_start_bracket = str(format_get).replace("['", "")
+
+                        remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                        remove_newline = remove_end_bracket.replace("\\n", "\n")
                         
                         failed_file.write(f"{remove_newline}\n\n")
                        
-                else:
+                    else:
 
-                    working = working + 1
+                        working = working + 1
+
+                        with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
+
+                            master_data = file1.read()
             
-                    print('Stream is working. Current state = {}'.format(state))
+                            print('Stream is working. Current state = {}'.format(state))
 
-                    player.stop()
+                            player.stop()
 
-                    print(f"Failed links: {failed}\n"
-                          f"Working links: {working}\n"
-                          f"Completed: {working + failed}/{len(urls)}"
-                          )
+                            print(f"Failed links: {failed}\n"
+                                  f"Working links: {working}\n"
+                                  f"Completed: {working + failed}/{len(urls)}"
+                                  )
 
-                    #text formatting and regex
-                    #escapes ? for regex, removes list formatting, and removes
-                    #physical \n in text
-                    escape_qm = i.replace("?", "\\?")
+                            #text formatting and regex
+                            #escapes ? for regex, removes list formatting, and removes
+                            #physical \n in text
+                            escape_qm = i.replace("?", "\\?")
 
-                    format_get = re.findall(r'#.*\n{url}'
-                        .format(url=escape_qm), master_data)
+                            format_get = re.findall(r'#.*\n{url}'
+                                .format(url=escape_qm), master_data)
 
-                    remove_start_bracket = str(format_get).replace("['", "")
+                            remove_start_bracket = str(format_get).replace("['", "")
 
-                    remove_end_bracket = remove_start_bracket.replace("']", "")
+                            remove_end_bracket = remove_start_bracket.replace("']", "")
 
-                    remove_newline = remove_end_bracket.replace("\\n", "\n")
+                            remove_newline = remove_end_bracket.replace("\\n", "\n")
 
-                    result_file.write(f"{remove_newline}\n\n")
+                            result_file.write(f"{remove_newline}\n\n")
 
         end_time = time.monotonic()
         
@@ -571,87 +571,73 @@ async def linkOnlyWebProcess():
 
     with io.open(final_result_name, mode="w", encoding="utf-8") as result_file:
 
-        failed = 0
+        with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
 
-        working = 0
+            failed = 0
 
-        start_time = time.monotonic()
+            working = 0
 
-        print(f"Loading {len(urls)} URLS...\n\n")
+            start_time = time.monotonic()
 
-        for i in urls:
+            print(f"Loading {len(urls)} URLS...\n\n")
+
+            for i in urls:
     
-            #create VLC instance
-            instance = vlc.Instance('--no-video --rtsp-timeout=12')
+                #create VLC instance
+                instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
-            #define VLC player
-            player=instance.media_player_new()
+                #define VLC player
+                player=instance.media_player_new()
 
-            #define VLC media
-            media=instance.media_new(i)
+                #define VLC media
+                media=instance.media_new(i)
 
-            #set player media
-            player.set_media(media)
+                #set player media
+                player.set_media(media)
 
-            #play the media
-            player.play()
+                #play the media
+                player.play()
 
-            #sleep for 8 sec for VLC to complete retries
-            print("Press 'Ctrl+C' to end process at any time.\n"
-                  "All current progress will be saved.\n"
-                  )
-
-            await asyncio.sleep(8)
-
-            #get current state.
-            state = str(player.get_state())
-
-            #find out if stream is working.
-            if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
-
-                failed = failed + 1
-
-                print('Stream is dead. Current state = {}'.format(state))
-
-                player.stop()
-
-                print(f"Failed links: {failed}\n"
-                      f"Working links: {working}\n"
-                      f"Completed: {working + failed}/{len(urls)}"
+                #sleep for 8 sec for VLC to complete retries
+                print("Press 'Ctrl+C' to end process at any time.\n"
+                      "All current progress will be saved.\n"
                       )
 
-                #text formatting and regex
-                #escapes ? for regex, removes list formatting, and removes
-                #physical \n in text
-                escape_qm = i.replace("?", "\\?")
+                await asyncio.sleep(8)
 
-                format_get = re.findall(r'#.*\n{url}'
-                    .format(url=escape_qm), master_data)
+                #get current state.
+                state = str(player.get_state())
 
-                remove_start_bracket = str(format_get).replace("['", "")
+                #find out if stream is working.
+                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
 
-                remove_end_bracket = remove_start_bracket.replace("']", "")
+                    failed = failed + 1
 
-                remove_newline = remove_end_bracket.replace("\\n", "\n")
+                    print('Stream is dead. Current state = {}'.format(state))
 
-                with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                    player.stop()
+
+                    print(f"Failed links: {failed}\n"
+                          f"Working links: {working}\n"
+                          f"Completed: {working + failed}/{len(urls)}"
+                          )
                         
-                    failed_file.write(f"{remove_newline}\n\n")
+                    failed_file.write(f"{i}\n")
                        
-            else:
+                else:
 
-                working = working + 1
+                    working = working + 1
             
-                print('Stream is working. Current state = {}'.format(state))
+                    print('Stream is working. Current state = {}'.format(state))
 
-                player.stop()
+                    player.stop()
 
-                print(f"Failed links: {failed}\n"
-                      f"Working links: {working}\n"
-                      f"Completed: {working + failed}/{len(urls)}"
-                      )
+                    print(f"Failed links: {failed}\n"
+                          f"Working links: {working}\n"
+                          f"Completed: {working + failed}/{len(urls)}"
+                          )
 
-                result_file.write(f"{i}\n")
+                    result_file.write(f"{i}\n")
 
     end_time = time.monotonic()
         
@@ -772,87 +758,73 @@ async def linkOnlyFileProcess():
 
         with io.open(final_result_name, mode="w", encoding="utf-8") as result_file:
 
-            failed = 0
+            with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
 
-            working = 0
+                failed = 0
 
-            start_time = time.monotonic()
+                working = 0
 
-            print(f"Loading {len(urls)} URLS...\n\n")
+                start_time = time.monotonic()
 
-            for i in urls:
+                print(f"Loading {len(urls)} URLS...\n\n")
+
+                for i in urls:
     
-                #create VLC instance
-                instance = vlc.Instance('--no-video --rtsp-timeout=12')
+                    #create VLC instance
+                    instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
-                #define VLC player
-                player=instance.media_player_new()
+                    #define VLC player
+                    player=instance.media_player_new()
 
-                #define VLC media
-                media=instance.media_new(i)
+                    #define VLC media
+                    media=instance.media_new(i)
 
-                #set player media
-                player.set_media(media)
+                    #set player media
+                    player.set_media(media)
 
-                #play the media
-                player.play()
+                    #play the media
+                    player.play()
 
-                #sleep for 8 sec for VLC to complete retries
-                print("Press 'Ctrl+C' to end process at any time.\n"
-                      "All current progress will be saved.\n"
-                      )
-
-                await asyncio.sleep(8)
-
-                #get current state.
-                state = str(player.get_state())
-
-                #find out if stream is working.
-                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
-
-                    failed = failed + 1
-
-                    print('Stream is dead. Current state = {}'.format(state))
-
-                    player.stop()
-
-                    print(f"Failed links: {failed}\n"
-                          f"Working links: {working}\n"
-                          f"Completed: {working + failed}/{len(urls)}"
+                    #sleep for 8 sec for VLC to complete retries
+                    print("Press 'Ctrl+C' to end process at any time.\n"
+                          "All current progress will be saved.\n"
                           )
 
-                    #text formatting and regex
-                    #escapes ? for regex, removes list formatting, and removes
-                    #physical \n in text
-                    escape_qm = i.replace("?", "\\?")
+                    await asyncio.sleep(8)
 
-                    format_get = re.findall(r'#.*\n{url}'
-                        .format(url=escape_qm), master_data)
+                    #get current state.
+                    state = str(player.get_state())
 
-                    remove_start_bracket = str(format_get).replace("['", "")
+                    #find out if stream is working.
+                    if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
 
-                    remove_end_bracket = remove_start_bracket.replace("']", "")
+                        failed = failed + 1
 
-                    remove_newline = remove_end_bracket.replace("\\n", "\n")
+                        print('Stream is dead. Current state = {}'.format(state))
 
-                    with io.open(f"{final_result_name} (FAILED STREAMS).m3u8", mode="w", encoding="utf-8") as failed_file:
+                        player.stop()
+
+                        print(f"Failed links: {failed}\n"
+                              f"Working links: {working}\n"
+                              f"Completed: {working + failed}/{len(urls)}"
+                              )                    
                         
-                        failed_file.write(f"{remove_newline}\n\n")
+                        failed_file.write(f"{i}\n")
                        
-                else:
+                    else:
 
-                    working = working + 1
+                        working = working + 1
             
-                    print('Stream is working. Current state = {}'.format(state))
+                        print('Stream is working. Current state = {}'.format(state))
 
-                    player.stop()
+                        player.stop()
 
-                    print(f"Failed links: {failed}\n"
-                          f"Working links: {working}\n"
-                          f"Completed: {working + failed}/{len(urls)}"
-                          )
+                        print(f"Failed links: {failed}\n"
+                              f"Working links: {working}\n"
+                              f"Completed: {working + failed}/{len(urls)}"
+                              )
 
-                    result_file.write(f"{i}\n")
+                        result_file.write(f"{i}\n")
 
         end_time = time.monotonic()
         
