@@ -305,6 +305,10 @@ async def webProcess():
     
     os.remove(file2.name)
 
+    if failed == 0:
+
+        os.remove(failed_file.name)
+
     if working == 0:
 
         print("No links available.\n"
@@ -529,6 +533,10 @@ async def fileProcess():
     
         os.remove(file2.name)
 
+        if failed == 0:
+
+            os.remove(failed_file.name)
+
         if working == 0:
 
             print("No links available.\n"
@@ -751,6 +759,10 @@ async def linkOnlyWebProcess():
     
     os.remove(file2.name)
 
+    if failed == 0:
+
+        os.remove(failed_file.name)
+
     if working == 0:
 
         print("No links available.\n"
@@ -955,6 +967,10 @@ async def linkOnlyFileProcess():
         os.remove(file1.name)
     
         os.remove(file2.name)
+
+        if failed == 0:
+
+            os.remove(failed_file.name)
 
         if working == 0:
 
