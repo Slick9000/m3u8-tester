@@ -1,5 +1,5 @@
 # m3u8-tester
-program which tests m3u8 stream files (or any stream, really) and outputs working streams to a m3u8 file named by date and time.
+program which tests m3u8 stream files (or any stream, really) and outputs working streams to a m3u8 file named by date and time (also outputs failed files to a separate file, so you can replace them if you choose to).
 
 i created this program due to the fact that although many stream testers are available out there, none of them seem to have the simple option of outputting all working streams to a text file. i may be wrong, but it doesn't seem so.
 
