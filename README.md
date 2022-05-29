@@ -16,9 +16,15 @@ many of these stream testers also don't have the flexibility of my m3u8-tester, 
 
 [vlc](https://www.videolan.org/vlc/)
 
-**NOTE: IF YOU HAVE THE 64 BIT VERSION OF PYTHON 3 INSTALLED, YOU ARE REQUIRED TO INSTALL THE 64 BIT VERSION OF VLC FOR M3U8 TESTER TO WORK.**
+## **important things to note**
 
-**THIS IS VICE VERSA FOR 32 BIT USERS.**
+• if you have the 64 bit version of python 3 installed, you are required to install the 64 bit version of vlc for m3u8 tester to work.**
+
+this is vice versa for 32 bit users.
+
+• if the source is not in m3u8 format, and you do not specify it is not (option 3 & 4 for using m3u8-tester.py in command line, webpage/file not in m3u8 format check box ☑ in the gui), the output will not work properly and will result in empty lists, i.e []
+
+this is due to the multiple regexes i use in order to grab and re-output data in the script.
 
 ## documentation
 there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them.
