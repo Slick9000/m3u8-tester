@@ -117,9 +117,9 @@ async def webProcess():
 
     try:
 
-        response = requests.get(url).content.decode('utf-8')
+        response = requests.get(url).content.decode('utf-8', 'ignore')
 
-    except requests.exceptions.MissingSchema:
+    except (requests.exceptions.InvalidURL, requests.exceptions.MissingSchema):
 
         print("\nURL invalid. Please enter a valid URL.")
 
@@ -233,30 +233,34 @@ async def webProcess():
 
                     failed = failed + 1
 
-                    print('Stream is dead. Current state = {}'.format(state))
+                    with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
 
-                    player.stop()
+                        master_data = file1.read()
 
-                    print(f"Failed links: {failed}\n"
-                          f"Working links: {working}\n"
-                          f"Completed: {working + failed}/{len(urls)}"
-                          )
+                        print('Stream is dead. Current state = {}'.format(state))
 
-                    #text formatting and regex
-                    #escapes ? for regex, removes list formatting, and removes
-                    #physical \n in text
-                    escape_qm = i.replace("?", "\\?")
+                        player.stop()
 
-                    format_get = re.findall(r'#.*\n{url}'
-                        .format(url=escape_qm), master_data)
+                        print(f"Failed links: {failed}\n"
+                              f"Working links: {working}\n"
+                              f"Completed: {working + failed}/{len(urls)}"
+                              )
 
-                    remove_start_bracket = str(format_get).replace("['", "")
+                        #text formatting and regex
+                        #escapes ? for regex, removes list formatting, and removes
+                        #physical \n in text
+                        escape_qm = i.replace("?", "\\?")
 
-                    remove_end_bracket = remove_start_bracket.replace("']", "")
+                        format_get = re.findall(r'#.*\n{url}'
+                            .format(url=escape_qm), master_data)
 
-                    remove_newline = remove_end_bracket.replace("\\n", "\n")
+                        remove_start_bracket = str(format_get).replace("['", "")
+
+                        remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                        remove_newline = remove_end_bracket.replace("\\n", "\n")
                         
-                    failed_file.write(f"{remove_newline}\n\n")
+                        failed_file.write(f"{remove_newline}\n\n")
                        
                 else:
 
@@ -461,30 +465,34 @@ async def fileProcess():
 
                         failed = failed + 1
 
-                        print('Stream is dead. Current state = {}'.format(state))
+                        with io.open(f"{temp1_name}.txt", mode="r", encoding="utf-8") as file1:
 
-                        player.stop()
+                            master_data = file1.read()
 
-                        print(f"Failed links: {failed}\n"
-                              f"Working links: {working}\n"
-                              f"Completed: {working + failed}/{len(urls)}"
-                              )
+                            print('Stream is dead. Current state = {}'.format(state))
 
-                        #text formatting and regex
-                        #escapes ? for regex, removes list formatting, and removes
-                        #physical \n in text
-                        escape_qm = i.replace("?", "\\?")
+                            player.stop()
 
-                        format_get = re.findall(r'#.*\n{url}'
-                            .format(url=escape_qm), master_data)
+                            print(f"Failed links: {failed}\n"
+                                  f"Working links: {working}\n"
+                                  f"Completed: {working + failed}/{len(urls)}"
+                                  )
 
-                        remove_start_bracket = str(format_get).replace("['", "")
+                            #text formatting and regex
+                            #escapes ? for regex, removes list formatting, and removes
+                            #physical \n in text
+                            escape_qm = i.replace("?", "\\?")
 
-                        remove_end_bracket = remove_start_bracket.replace("']", "")
+                            format_get = re.findall(r'#.*\n{url}'
+                               .format(url=escape_qm), master_data)
 
-                        remove_newline = remove_end_bracket.replace("\\n", "\n")
+                            remove_start_bracket = str(format_get).replace("['", "")
+
+                            remove_end_bracket = remove_start_bracket.replace("']", "")
+
+                            remove_newline = remove_end_bracket.replace("\\n", "\n")
                         
-                        failed_file.write(f"{remove_newline}\n\n")
+                            failed_file.write(f"{remove_newline}\n\n")
                        
                     else:
 
@@ -593,9 +601,9 @@ async def linkOnlyWebProcess():
 
     try:
 
-        response = requests.get(url).content.decode('utf-8')
+        response = requests.get(url).content.decode('utf-8', 'ignore')
 
-    except requests.exceptions.MissingSchema:
+    except (requests.exceptions.InvalidURL, requests.exceptions.MissingSchema):
 
         print("\nURL invalid. Please enter a valid URL.")
 
