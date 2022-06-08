@@ -133,7 +133,10 @@ async def webProcess():
         
             urls = re.findall(r'(https?://[^\s]+)', remimages)
 
-    result_file_name = datetime.datetime.now().strftime("%dth %B, %Y (%X).m3u8")
+            #don't test duplicate links
+            urls = list(set(urls))
+
+    result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
     final_result_name = re.sub(r'(:\.?)', '-', result_file_name)
 
@@ -196,21 +199,17 @@ async def webProcess():
                               f"Completed: {working + failed}/{len(urls)}"
                               )
 
-                        #text formatting and regex
-                        #escapes ? for regex, removes list formatting, and removes
-                        #physical \n in text
+                        #escapes ? for regex, and prints all results associated with
+                        #the link. meaning, multiple occurrences of the same url for
+                        #example under different group titles will all be output
                         escape_qm = i.replace("?", "\\?")
 
-                        format_get = re.findall(r'#.*\n{url}'
+                        format_get = re.findall(r'#EXTINF.*\n{url}'
                             .format(url=escape_qm), master_data)
 
-                        remove_start_bracket = str(format_get).replace("['", "")
+                        for item in format_get:
 
-                        remove_end_bracket = remove_start_bracket.replace("']", "")
-
-                        remove_newline = remove_end_bracket.replace("\\n", "\n")
-                        
-                        failed_file.write(f"{remove_newline}\n\n")
+                            failed_file.write(f"{item}\n\n")
                        
                 else:
 
@@ -229,21 +228,17 @@ async def webProcess():
                               f"Completed: {working + failed}/{len(urls)}"
                               )
 
-                        #text formatting and regex
-                        #escapes ? for regex, removes list formatting, and removes
-                        #physical \n in text
+                        #escapes ? for regex, and prints all results associated with
+                        #the link. meaning, multiple occurrences of the same url for
+                        #example under different group titles will all be output
                         escape_qm = i.replace("?", "\\?")
 
-                        format_get = re.findall(r'#.*\n{url}'
+                        format_get = re.findall(r'#EXTINF.*\n{url}'
                             .format(url=escape_qm), master_data)
 
-                        remove_start_bracket = str(format_get).replace("['", "")
+                        for item in format_get:
 
-                        remove_end_bracket = remove_start_bracket.replace("']", "")
-
-                        remove_newline = remove_end_bracket.replace("\\n", "\n")
-
-                        result_file.write(f"{remove_newline}\n\n")
+                            result_file.write(f"{item}\n\n")
 
     end_time = time.monotonic()
         
@@ -361,8 +356,11 @@ async def fileProcess():
                                    '', remquote)
         
                 urls = re.findall(r'(https?://[^\s]+)', remimages)
+                
+                #don't test duplicate links
+                urls = list(set(urls))
 
-        result_file_name = datetime.datetime.now().strftime("%dth %B, %Y (%X).m3u8")
+        result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
         final_result_name = re.sub(r'(:\.?)', '-', result_file_name)
 
@@ -425,21 +423,17 @@ async def fileProcess():
                                   f"Completed: {working + failed}/{len(urls)}"
                                   )
 
-                            #text formatting and regex
-                            #escapes ? for regex, removes list formatting, and removes
-                            #physical \n in text
+                            #escapes ? for regex, and prints all results associated with
+                            #the link. meaning, multiple occurrences of the same url for
+                            #example under different group titles will all be output
                             escape_qm = i.replace("?", "\\?")
 
-                            format_get = re.findall(r'#.*\n{url}'
-                               .format(url=escape_qm), master_data)
+                            format_get = re.findall(r'#EXTINF.*\n{url}'
+                                .format(url=escape_qm), master_data)
 
-                            remove_start_bracket = str(format_get).replace("['", "")
+                            for item in format_get:
 
-                            remove_end_bracket = remove_start_bracket.replace("']", "")
-
-                            remove_newline = remove_end_bracket.replace("\\n", "\n")
-                        
-                            failed_file.write(f"{remove_newline}\n\n")
+                                failed_file.write(f"{item}\n\n")
                        
                     else:
 
@@ -458,21 +452,17 @@ async def fileProcess():
                                   f"Completed: {working + failed}/{len(urls)}"
                                   )
 
-                            #text formatting and regex
-                            #escapes ? for regex, removes list formatting, and removes
-                            #physical \n in text
+                            #escapes ? for regex, and prints all results associated with
+                            #the link. meaning, multiple occurrences of the same url for
+                            #example under different group titles will all be output
                             escape_qm = i.replace("?", "\\?")
 
-                            format_get = re.findall(r'#.*\n{url}'
+                            format_get = re.findall(r'#EXTINF.*\n{url}'
                                 .format(url=escape_qm), master_data)
 
-                            remove_start_bracket = str(format_get).replace("['", "")
+                            for item in format_get:
 
-                            remove_end_bracket = remove_start_bracket.replace("']", "")
-
-                            remove_newline = remove_end_bracket.replace("\\n", "\n")
-
-                            result_file.write(f"{remove_newline}\n\n")
+                                result_file.write(f"{item}\n\n")
 
         end_time = time.monotonic()
         
@@ -581,7 +571,10 @@ async def linkOnlyWebProcess():
         
             urls = re.findall(r'(https?://[^\s]+)', remimages)
 
-    result_file_name = datetime.datetime.now().strftime("%dth %B, %Y (%X).m3u8")
+            #don't test duplicate links
+            urls = list(set(urls))
+
+    result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
     final_result_name = re.sub(r'(:\.?)', '-', result_file_name)
 
@@ -772,7 +765,10 @@ async def linkOnlyFileProcess():
         
                 urls = re.findall(r'(https?://[^\s]+)', remimages)
 
-        result_file_name = datetime.datetime.now().strftime("%dth %B, %Y (%X).m3u8")
+                #don't test duplicate links
+                urls = list(set(urls))
+
+        result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
         final_result_name = re.sub(r'(:\.?)', '-', result_file_name)
 
