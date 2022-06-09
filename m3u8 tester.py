@@ -159,6 +159,9 @@ async def webProcess():
                 #create VLC instance
                 instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
+                #setting user agent
+                instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
                 #define VLC player
                 player=instance.media_player_new()
 
@@ -383,6 +386,9 @@ async def fileProcess():
                     #create VLC instance
                     instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
+                    #setting user agent
+                    instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
                     #define VLC player
                     player=instance.media_player_new()
 
@@ -595,6 +601,9 @@ async def linkOnlyWebProcess():
                 #create VLC instance
                 instance = vlc.Instance('--no-video --rtsp-timeout=12')
 
+                #setting user agent
+                instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
                 #define VLC player
                 player=instance.media_player_new()
 
@@ -788,6 +797,9 @@ async def linkOnlyFileProcess():
     
                     #create VLC instance
                     instance = vlc.Instance('--no-video --rtsp-timeout=12')
+
+                    #setting user agent
+                    instance.set_user_agent("GFG", "GFG / Python / 3.6")
 
                     #define VLC player
                     player=instance.media_player_new()
