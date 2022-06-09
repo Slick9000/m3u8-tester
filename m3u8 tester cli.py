@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+from collections import OrderedDict
 import datetime
 from datetime import timedelta
 import io
@@ -184,7 +185,7 @@ async def webProcess():
             urls = re.findall(r'(https?://[^\s]+)', remimages)
 
             #don't test duplicate links
-            urls = list(set(urls))
+            urls = list(OrderedDict.fromkeys(urls))
 
     result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
@@ -414,7 +415,7 @@ async def fileProcess():
                 urls = re.findall(r'(https?://[^\s]+)', remimages)
 
                 #don't test duplicate links
-                urls = list(set(urls))
+                urls = list(OrderedDict.fromkeys(urls))
 
         result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
@@ -664,7 +665,7 @@ async def linkOnlyWebProcess():
             urls = re.findall(r'(https?://[^\s]+)', remimages)
 
             #don't test duplicate links
-            urls = list(set(urls))
+            urls = list(OrderedDict.fromkeys(urls))
 
     result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
@@ -877,7 +878,7 @@ async def linkOnlyFileProcess():
                 urls = re.findall(r'(https?://[^\s]+)', remimages)
 
                 #don't test duplicate links
-                urls = list(set(urls))
+                urls = list(OrderedDict.fromkeys(urls))
 
         result_file_name = datetime.datetime.now().strftime("%d %B, %Y (%X).m3u8")
 
