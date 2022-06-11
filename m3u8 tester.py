@@ -17,6 +17,15 @@ if 'win' in sys.platform:
     
     python = 'python'
 
+
+if len(sys.argv) < 3:
+
+    print("Script requires 2 parameters!\n"
+          "e.g python 'm3u8 tester.py' {option} {source}"
+          )
+
+    sys.exit()
+
 print('(*) Checking for required dependencies...\n')
 
 while True:
