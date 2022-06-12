@@ -12,6 +12,9 @@ from tkinter import Button, BooleanVar, Checkbutton, END, Entry, filedialog, Fra
 #allows the python subprocess output to be printed in real time
 os.environ['PYTHONUNBUFFERED'] = '1'
 
+#initialize process variable, to check if process is running or not
+process = False
+
 #allows subprocess to work on unix and windows
 python = 'python3'
 
@@ -20,6 +23,8 @@ if 'win' in sys.platform:
     python = 'python'
 
 
+#functions ---------------------------------------------------------------
+#about menu function
 def aboutSection():
 
    messagebox.showinfo('About',
@@ -32,6 +37,7 @@ def aboutSection():
                        )
 
 
+#help menu function
 def helpSection():
 
    messagebox.showinfo('Help',
@@ -56,6 +62,7 @@ def helpSection():
                        )
 
 
+#paste button function
 def pasteLink():
 
     try:
@@ -83,6 +90,7 @@ def pasteLink():
         return
 
 
+#file explorer function
 def browseFiles():
     
     source = filedialog.askopenfilename(initialdir = '/',
@@ -95,6 +103,7 @@ def browseFiles():
     file.set(source)
 
 
+#run subprocess function
 def runCommand(link, file, timeout=None, window=None):
 
     #first portion tests for what type of source is input, link or file (with error handling)
@@ -201,10 +210,11 @@ def runCommand(link, file, timeout=None, window=None):
 
         running_dir = sys._MEIPASS
 
+    global process
 
     #subprocess for running m3u8 tester
     process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}"',
-                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                               shell=True, bufsize=1024, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     for line in process.stdout:
         
@@ -227,14 +237,43 @@ def runCommand(link, file, timeout=None, window=None):
     #relock the text box
     txtbox.configure(state='disabled')
 
-#window
+#end subprocess function
+def endSubprocess(event):
+    
+    if process == False:
+
+        return
+
+    if process.poll() == None:
+
+        process.kill()
+    
+        #unlock the text box to allow output to be written to the window
+        txtbox.configure(state='normal')
+
+        txtbox.insert(END, 'Process has been ended and all data has been saved.\n')
+
+        #brings cursor to the last line of output
+        txtbox.see(END)
+
+        #relock the text box
+        txtbox.configure(state='disabled')
+
+
+#initialize window
 tkWindow = Tk()
 
+#set window to non-resizable
 tkWindow.resizable(False, False)
 
+#set title
 tkWindow.title('M3U8 Tester')
 
-#link label and text entry box
+#keybind to end process with ctrl + c when process is running
+#works identical to the keyboard interrupt if run from command line
+tkWindow.bind('<Control-c>', endSubprocess)
+
+#link label and text entry frame -----------------------------------------
 inputFrame = Frame(tkWindow)
 
 inputFrame.grid(row=0, column=0, sticky=tkinter.W+tkinter.E)   
@@ -253,7 +292,7 @@ button_paste_link = Button(inputFrame, text='Paste', command=pasteLink)
 
 button_paste_link.grid(row=0, column=3)
 
-#file label and file entry box
+#file label and file entry frame -----------------------------------------
 fileLabel = Label(inputFrame,text='FILE', font=('Arial', 14))
 
 fileLabel.grid(row=1, column=1)
@@ -268,6 +307,7 @@ button_explore = Button(inputFrame, text='Browse', command=browseFiles)
 
 button_explore.grid(row=1, column=3)
 
+#run command -------------------------------------------------------------
 runCommand = partial(runCommand, link, file)
 
 #function for multithreading, to allow subprocess to run without the window freezing
@@ -300,6 +340,7 @@ startButton = Button(inputFrame, text='Start', font=('Arial', 14), command=runCo
 
 startButton.grid(row=4, column=1, padx=(10), pady=10)
 
+#menu configuration ------------------------------------------------------
 menu = Menu(tkWindow)
 
 tkWindow.config(menu=menu)
@@ -312,7 +353,7 @@ menu.add_command(label='About', command=aboutSection)
 
 menu.add_command(label='Help', command=helpSection)
 
-#group2 Frame ----------------------------------------------------
+#textbox frame -----------------------------------------------------------
 textboxFrame = tkinter.LabelFrame(tkWindow, text='Processing Output', font=('Arial', 12), padx=5, pady=5)
 
 textboxFrame.grid(row=5, column=1, columnspan=3, padx=10, pady=10, sticky=tkinter.E+tkinter.W+tkinter.N+tkinter.S)
@@ -332,7 +373,7 @@ txtbox.grid(row=0, column=0, sticky=tkinter.E+tkinter.W+tkinter.N+tkinter.S)
 
 txtbox.insert(END, 'All processing data will output in this text box!')
 
-#lock the text box
+#lock the text box on initialization
 txtbox.configure(state='disabled')
 
 tkWindow.mainloop()
