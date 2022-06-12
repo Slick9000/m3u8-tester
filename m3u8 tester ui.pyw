@@ -214,7 +214,7 @@ def runCommand(link, file, timeout=None, window=None):
 
     #subprocess for running m3u8 tester
     process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}"',
-                               shell=True, bufsize=1024, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     for line in process.stdout:
         
