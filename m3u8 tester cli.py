@@ -205,16 +205,16 @@ async def webProcess():
 
             print(f"Loading {len(urls)} URLS...\n\n")
 
+            #create VLC instance
+            instance = vlc.Instance('--no-video --rtsp-timeout=12')
+
+            #setting user agent
+            instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
+            #define VLC player
+            player=instance.media_player_new()
+
             for i in urls:
-    
-                #create VLC instance
-                instance = vlc.Instance('--no-video --rtsp-timeout=12')
-
-                #setting user agent
-                instance.set_user_agent("GFG", "GFG / Python / 3.6")
-
-                #define VLC player
-                player=instance.media_player_new()
 
                 #define VLC media
                 media=instance.media_new(i)
@@ -435,16 +435,16 @@ async def fileProcess():
 
                 print(f"Loading {len(urls)} URLS...\n\n")
 
+                #create VLC instance
+                instance = vlc.Instance("--no-video --rtsp-timeout=12")
+
+                #setting user agent
+                instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
+                #define VLC player
+                player=instance.media_player_new()
+
                 for i in urls:
-    
-                    #create VLC instance
-                    instance = vlc.Instance("--no-video --rtsp-timeout=12")
-
-                    #setting user agent
-                    instance.set_user_agent("GFG", "GFG / Python / 3.6")
-
-                    #define VLC player
-                    player=instance.media_player_new()
 
                     #define VLC media
                     media=instance.media_new(i)
@@ -683,16 +683,16 @@ async def linkOnlyWebProcess():
 
             print(f"Loading {len(urls)} URLS...\n\n")
 
+            #create VLC instance
+            instance = vlc.Instance('--no-video --rtsp-timeout=12')
+
+            #setting user agent
+            instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
+            #define VLC player
+            player=instance.media_player_new()
+
             for i in urls:
-    
-                #create VLC instance
-                instance = vlc.Instance('--no-video --rtsp-timeout=12')
-
-                #setting user agent
-                instance.set_user_agent("GFG", "GFG / Python / 3.6")
-
-                #define VLC player
-                player=instance.media_player_new()
 
                 #define VLC media
                 media=instance.media_new(i)
@@ -896,16 +896,16 @@ async def linkOnlyFileProcess():
 
                 print(f"Loading {len(urls)} URLS...\n\n")
 
+                #create VLC instance
+                instance = vlc.Instance('--no-video --rtsp-timeout=12')
+
+                #setting user agent
+                instance.set_user_agent("GFG", "GFG / Python / 3.6")
+
+                #define VLC player
+                player=instance.media_player_new()
+
                 for i in urls:
-    
-                    #create VLC instance
-                    instance = vlc.Instance('--no-video --rtsp-timeout=12')
-
-                    #setting user agent
-                    instance.set_user_agent("GFG", "GFG / Python / 3.6")
-
-                    #define VLC player
-                    player=instance.media_player_new()
 
                     #define VLC media
                     media=instance.media_new(i)
