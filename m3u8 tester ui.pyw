@@ -212,9 +212,22 @@ def runCommand(link, file, timeout=None, window=None):
 
     global process
 
-    #subprocess for running m3u8 tester
-    process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}"',
-                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    #if checked play vlc stream in gui window
+    if checkVal3.get() == True:
+
+        videoFrame = Frame(tkWindow, padx=5, pady=5, width=40, height=20)
+
+        videoFrame.grid(row=0, column=1, columnspan=3, padx=10, pady=10, sticky=tkinter.E+tkinter.W+tkinter.N+tkinter.S)
+
+        #subprocess for running m3u8 tester
+        process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}" {videoFrame.winfo_id()}',
+                                   shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    else:
+
+        #subprocess for running m3u8 tester
+        process = subprocess.Popen(f'{python} "{running_dir}/m3u8 tester.py" {option} "{source}"',
+                                   shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     for line in process.stdout:
         
@@ -335,6 +348,15 @@ checkbox2 = Checkbutton(inputFrame, text='File not in M3U8 format', var=checkVal
 
 checkbox2.grid(row=1, column=4)
 
+#checkbox for live stream video
+checkVal3 = BooleanVar(tkWindow)
+
+checkVal3.set(False)
+
+checkbox3 = Checkbutton(inputFrame, text='Play live video?', var=checkVal3)
+
+checkbox3.grid(row=2, column=2)
+
 #start button
 startButton = Button(inputFrame, text='Start', font=('Arial', 14), command=runCommandThread)
 
@@ -357,10 +379,6 @@ menu.add_command(label='Help', command=helpSection)
 textboxFrame = tkinter.LabelFrame(tkWindow, text='Processing Output', font=('Arial', 12), padx=5, pady=5)
 
 textboxFrame.grid(row=5, column=1, columnspan=3, padx=10, pady=10, sticky=tkinter.E+tkinter.W+tkinter.N+tkinter.S)
-
-tkWindow.columnconfigure(0, weight=1)
-
-tkWindow.rowconfigure(1, weight=1)
 
 textboxFrame.rowconfigure(0, weight=1)
 
