@@ -24,7 +24,7 @@ this is vice versa for 32 bit users.
 
 • if the source is not in m3u8 format, and you do not specify it is not (option 3 & 4 for using m3u8-tester.py in command line, webpage/file not in m3u8 format check box ☑ in the gui), the output will not work properly and will result in empty lists, i.e []
 
-this is due to the multiple regexes i use in order to grab and re-output data in the script.
+this is due to the regex i use to get the m3u8 format exactly like it was before.
 
 ## documentation
 there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them.
@@ -35,13 +35,21 @@ there are comments all over the code within both the gui and main program files 
 
 you can give `m3u8 tester.py` **direct command line arguments**
 
-**e.g: `python "m3u8 tester.py" {option-number} "{link/file-path}"`, or you can use the tkinter gui included with the program.**
+**e.g: `python "m3u8 tester.py" {option-number} "{link/file-path}"`
+
+**gui version**
+
+the gui version of m3u8 tester allows you to do the same thing as the command line script, but with a friendly interface. it also has an option to play the live stream's video in the gui. it is the way i recommend m3u8 tester to be used, and is the way the executable release is distributed.
+
+**example:**
+
+<img src="m3u8-tester-gui-preview.png">
 
 **cli version**
 
 m3u8 tester was orignally a cli (command-line interface) program, so there is `m3u8 tester cli.py`, in case you prefer that.
 
-**e.g: [link](https://pastebin.com/raw/SLZf7d4y)**
+**e.g of the cli version: [link](https://pastebin.com/raw/SLZf7d4y)**
 
 ```
 M3U8 Tester
@@ -74,6 +82,8 @@ All current progress will be saved.
 ...and so on.
 
 <br/>
+
+## m3u8 tester options
 
 **1: allows you to input a raw url formatted in m3u8 format**
 
