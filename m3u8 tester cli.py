@@ -236,7 +236,7 @@ async def webProcess():
                 state = str(player.get_state())
 
                 #find out if stream is working.
-                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
+                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended":
 
                     failed = failed + 1
 
@@ -466,7 +466,7 @@ async def fileProcess():
                     state = str(player.get_state())
 
                     #find out if stream is working.
-                    if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
+                    if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended":
 
                         failed = failed + 1
 
@@ -714,7 +714,7 @@ async def linkOnlyWebProcess():
                 state = str(player.get_state())
 
                 #find out if stream is working.
-                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
+                if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended":
 
                     failed = failed + 1
 
@@ -927,7 +927,7 @@ async def linkOnlyFileProcess():
                     state = str(player.get_state())
 
                     #find out if stream is working.
-                    if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended" or state == "vlc.State.Opening" or state == "State.Opening":
+                    if state == "vlc.State.Error" or state == "State.Error" or state == "vlc.State.Ended" or state == "State.Ended":
 
                         failed = failed + 1
 
