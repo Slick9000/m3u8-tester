@@ -24,7 +24,13 @@ this is vice versa for 32 bit users.
 
 • if the source is not in m3u8 format, and you do not specify it is not (option 3 & 4 for using m3u8-tester.py in command line, webpage/file not in m3u8 format check box ☑ in the gui), the output will not work properly and will result in empty lists, i.e []
 
-this is due to the regex i use to get the m3u8 format exactly like it was before.
+this is due to the regex i use to get the m3u8 format exactly like it was before. 
+
+**e.g:**
+
+#EXTINF tvg-logo={logo}, group-title={title}, channel-id={id}, {channel-name}
+
+https://linktostream.m3u8
 
 ## documentation
 there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them.
@@ -47,7 +53,7 @@ the gui version of m3u8 tester allows you to do the same thing as the command li
 
 **cli version**
 
-m3u8 tester was orignally a cli (command-line interface) program, so there is `m3u8 tester cli.py`, in case you prefer that.
+m3u8 tester was originally a cli (command-line interface) program, so there is `m3u8 tester cli.py`, in case you prefer that.
 
 **e.g of the cli version: [link](https://pastebin.com/raw/SLZf7d4y)**
 
