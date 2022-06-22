@@ -18,13 +18,15 @@ many of these stream testers also don't have the flexibility of my m3u8-tester, 
 
 ## **important things to note**
 
-• if you have the 64 bit version of python 3 installed, you are required to install the 64 bit version of vlc for m3u8 tester to work.**
+• users using the m3u8-tester.exe from the download page will only be required to download vlc, as **everything else is already included in the executable.**
 
-this is vice versa for 32 bit users.
+• if you have the 64 bit version of python 3 installed, you are **required to install the 64 bit version of vlc for m3u8 tester to work.**
 
-• if the source is not in m3u8 format, and you do not specify it is not (option 3 & 4 for using m3u8-tester.py in command line, webpage/file not in m3u8 format check box ☑ in the gui), the output will not work properly and will result in empty lists, i.e []
+this is vice versa for **32 bit users.**
 
-this is due to the regex i use to get the m3u8 format exactly like it was before. 
+• if the source is not in m3u8 format, and you do not specify it is not (i.e. **option 3 - link not in m3u8 format, option 4 - file not in m3u8 format**, for using m3u8-tester.py from **command line**, or **webpage not in m3u8 format, file not in m3u8 format check box ☑ in the gui**), the output will not work properly and will result in empty lists, i.e []
+
+this is due to the regex i use to get the m3u8 format **exactly like it was before.**
 
 **e.g:**
 
@@ -41,7 +43,7 @@ there are comments all over the code within both the gui and main program files 
 
 you can give `m3u8 tester.py` **direct command line arguments**
 
-**e.g: `python "m3u8 tester.py" {option-number} "{link/file-path}"`
+**e.g:** `python "m3u8 tester.py" {option-number} "{link/file-path}"`
 
 **gui version**
 
