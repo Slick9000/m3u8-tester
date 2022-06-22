@@ -204,7 +204,7 @@ def runCommand(link, file, timeout=None, window=None):
     #to get directory of process. first one gets the current working directory
     #if running as a script, second one gets the working directory from files
     #embedded within pyinstaller's exectuable if running as an exe
-    #command to build pyinstaller exectuable: pyinstaller --onefile --add-data="m3u8 tester.py;." '.\m3u8 tester ui.pyw'
+    #command to build pyinstaller exectuable: pyinstaller --onefile --add-data="m3u8 tester.py;." '.\m3u8 tester gui.pyw'
     running_dir = os.getcwd()
 
     if getattr(sys, 'frozen', False): # Running as compiled
