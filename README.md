@@ -5,7 +5,21 @@ i created this program due to the fact that although many stream testers are ava
 
 many of these stream testers also don't have the flexibility of my m3u8-tester, which allows you to see the process in real time and see the number of streams which are working vs failing, and test streams regardless of the format they are in.
 
+## credits
+
+• slick9000 - all code written
+
+• irbee - feature ideas and gui design
+
 ## [download](https://github.com/Slick9000/m3u8-tester/releases/latest)
+
+## donations
+
+while completely optional, it would be highly appreciated if you could donate if you find this program helpful!
+
+i put a lot of hours into coding and debugging it, and a donation of any amount can be made through paypal.
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/irbee246)
 
 ## requirements
 [requests](https://pypi.org/project/requests/)
