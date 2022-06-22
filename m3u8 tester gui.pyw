@@ -33,7 +33,8 @@ def aboutSection():
                        'pastebin.com/raw, raw.githubusercontent.com) as well as '
                        'raw webpages and files with a list of links only, '
                        'and returns the working links in a M3U8 file.\n\n'
-                       'Created by Slick9000'
+                       'Created by Slick9000 and IrBee.\n\n'
+                       'Users can donate at: https://www.paypal.com/paypalme/irbee246'
                        )
 
 
