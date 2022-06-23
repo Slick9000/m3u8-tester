@@ -129,15 +129,11 @@ button_paste_link.grid(row=0, column=3)
 runCommand = partial(runCommand, channel)
 
 #function for multithreading, to allow subprocess to run without the window freezing
-def runCommandThread(event):
+def runCommandThread():
 
     runCommandProcess = Process(target=runCommand)
     
     runCommandProcess.start()
-
-#keybind to run process by pressing the enter key
-#(works the same as pressing the button)
-tkWindow.bind('<Return>', runCommandThread)
 
 #start button
 startButton = Button(inputFrame, text='Find Logo!', font=('Arial', 12), command=runCommandThread)
