@@ -325,7 +325,7 @@ button_explore.grid(row=1, column=3)
 runCommand = partial(runCommand, link, file)
 
 #function for multithreading, to allow subprocess to run without the window freezing
-def runCommandThread(event):
+def runCommandThread():
 
     runCommandProcess = Process(target=runCommand)
     
