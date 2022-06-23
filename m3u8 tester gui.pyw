@@ -325,11 +325,15 @@ button_explore.grid(row=1, column=3)
 runCommand = partial(runCommand, link, file)
 
 #function for multithreading, to allow subprocess to run without the window freezing
-def runCommandThread():
+def runCommandThread(event):
 
     runCommandProcess = Process(target=runCommand)
     
     runCommandProcess.start()
+    
+#keybind to run process by pressing the enter key
+#(works the same as pressing the button)
+tkWindow.bind('<Return>', runCommandThread)
 
 #checkbox for if raw webpage only contains links
 checkVal1 = BooleanVar(tkWindow)
