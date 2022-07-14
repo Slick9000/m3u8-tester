@@ -225,12 +225,12 @@ async def webProcess():
                 #play the media
                 player.play()
 
-                #sleep for 8 sec for VLC to complete retries
+                #sleep for 15 sec for VLC to complete retries
                 print("Press 'Ctrl+C' to end process at any time.\n"
                       "All current progress will be saved.\n"
                       )
 
-                await asyncio.sleep(8)
+                await asyncio.sleep(15)
 
                 #get current state.
                 state = str(player.get_state())
@@ -455,12 +455,12 @@ async def fileProcess():
                     #play the media
                     player.play()
 
-                    #sleep for 8 sec for VLC to complete retries
+                    #sleep for 15 sec for VLC to complete retries
                     print("Press 'Ctrl+C' to end process at any time.\n"
                           "All current progress will be saved.\n"
                           )
 
-                    await asyncio.sleep(8)
+                    await asyncio.sleep(15)
 
                     #get current state.
                     state = str(player.get_state())
@@ -703,12 +703,12 @@ async def linkOnlyWebProcess():
                 #play the media
                 player.play()
 
-                #sleep for 8 sec for VLC to complete retries
+                #sleep for 15 sec for VLC to complete retries
                 print("Press 'Ctrl+C' to end process at any time.\n"
                       "All current progress will be saved.\n"
                       )
 
-                await asyncio.sleep(8)
+                await asyncio.sleep(15)
 
                 #get current state.
                 state = str(player.get_state())
@@ -916,12 +916,12 @@ async def linkOnlyFileProcess():
                     #play the media
                     player.play()
 
-                    #sleep for 8 sec for VLC to complete retries
+                    #sleep for 15 sec for VLC to complete retries
                     print("Press 'Ctrl+C' to end process at any time.\n"
                           "All current progress will be saved.\n"
                           )
 
-                    await asyncio.sleep(8)
+                    await asyncio.sleep(15)
 
                     #get current state.
                     state = str(player.get_state())
