@@ -1,11 +1,11 @@
-# m3u8-tester
+# 📺 m3u8-tester
 program which tests m3u8 stream files (or any stream, really) and outputs working streams to a m3u8 file named by date and time (also outputs failed files to a separate file, so you can replace them if you choose to).
 
 i created this program due to the fact that although many stream testers are available out there, none of them seem to have the simple option of outputting all working streams to a text file. i may be wrong, but it doesn't seem so.
 
 many of these stream testers also don't have the flexibility of my m3u8-tester, which allows you to see the process in real time and see the number of streams which are working vs failing, and test streams regardless of the format they are in.
 
-## credits
+## ©️ credits
 
 • slick9000 - all code written
 
@@ -13,7 +13,7 @@ many of these stream testers also don't have the flexibility of my m3u8-tester, 
 
 ## [download](https://github.com/Slick9000/m3u8-tester/releases/latest)
 
-## donations
+## ☕ donations
 
 while completely optional, it would be highly appreciated if you could donate if you find this program helpful!
 
@@ -21,7 +21,7 @@ i put a lot of hours into coding and debugging it, and a donation of any amount 
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/irbee246)
 
-## requirements
+## ❗ requirements
 [requests](https://pypi.org/project/requests/)
 
 [python-vlc](https://pypi.org/project/python-vlc/)
@@ -30,7 +30,7 @@ i put a lot of hours into coding and debugging it, and a donation of any amount 
 
 [vlc](https://www.videolan.org/vlc/)
 
-## **important things to note**
+## ❗ **important things to note**
 
 • users using the m3u8-tester.exe from the download page will only be required to download vlc, as **everything else is already included in the executable.**
 
@@ -48,10 +48,10 @@ this is due to the regex i use to get the m3u8 format **exactly like it was befo
 
 https://linktostream.m3u8
 
-## documentation
+## 📝 documentation
 there are comments all over the code within both the gui and main program files explaining literally everything. if there is anything you are unsure about, be sure to check in them.
 
-## features
+## 💡 features
 
 **command line usage**
 
@@ -105,7 +105,7 @@ All current progress will be saved.
 
 <br/>
 
-## m3u8 tester options
+## ⚙️ m3u8 tester options
 
 **1: allows you to input a raw url formatted in m3u8 format**
 
